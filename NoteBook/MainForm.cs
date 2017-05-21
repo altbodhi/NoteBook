@@ -17,14 +17,15 @@ namespace NoteBook
             gv.Columns.Add(new GridColumn() {HeaderText="Creator", DataCell = new TextBoxCell("CreatorName") });
             var ds = new NoteRepo();
             gv.DataStore = ds.GetAll();
-			// scrollable region as the main content
-			Content = new Scrollable
+			var layout = new TableLayout();
+			layout.Rows.Add(new TableRow(new TableCell(new Scrollable()
 			{
-				// table with three rows
-                Content = new Scrollable(){
-                    Content=gv
-                }
-			};
+				Content = gv
+            })));
+
+            layout.Rows.Add(new TableRow(new TableCell(new Panel())));
+            // scrollable region as the main content
+            Content = layout;
 
 			// create a few commands that can be used for the menu and toolbar
 			var clickMe = new Command { MenuText = "Click Me!", ToolBarText = "Click Me!" };
