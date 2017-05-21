@@ -13,17 +13,17 @@ namespace NoteBook
 		{
 			Title = "My Eto Form";
 			ClientSize = new Size(400, 350);
-
+            var gv = new GridView();
+            gv.Columns.Add(new GridColumn() {HeaderText="Creator", DataCell = new TextBoxCell("CreatorName") });
+            var ds = new NoteRepo();
+            gv.DataStore = ds.GetAll();
 			// scrollable region as the main content
 			Content = new Scrollable
 			{
 				// table with three rows
-				Content = new TableLayout(
-					null,
-					// row with three columns
-					new TableRow(null, new Label { Text = "Hello World!" }, null),
-					null
-				)
+                Content = new Scrollable(){
+                    Content=gv
+                }
 			};
 
 			// create a few commands that can be used for the menu and toolbar
