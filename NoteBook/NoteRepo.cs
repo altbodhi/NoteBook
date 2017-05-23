@@ -1,19 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using LiteDB;
 namespace NoteBook
 {
     public class NoteRepo
     {
 		public IEnumerable<Note> GetAll()
 		{
-            var pr = new PersonRepo();
-			return new Note[] {
-                new Note(pr.Get("Вася")),
-                new Note(pr.Get("Оля")),
-                new Note(pr.Get("Петя")),
-                new Note(pr.Get("Коля"))
-            };
+			using (var db = new LiteDatabase(Helper.PathDb)) {
+				return db.GetCollection<Note>("notes").FindAll();
+			}
 		}
 		public Note Get(object id)
 		{

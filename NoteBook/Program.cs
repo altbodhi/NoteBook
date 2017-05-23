@@ -9,6 +9,8 @@ namespace NoteBook
 		[STAThread]
 		public static void Main(string[] args)
 		{
+			Helper.BuildSchema();
+
 			// run application with our main form
 			new Application().Run(new MainForm());
 		}
